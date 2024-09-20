@@ -2,9 +2,9 @@
 
 namespace Deller\QrCode\Tests;
 
+use Deller\QrCode\QrCodeServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Deller\QrCode\QrCodeServiceProvider;
 
 class TestCase extends Orchestra
 {
