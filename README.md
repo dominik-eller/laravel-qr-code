@@ -5,15 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/dominik-eller/laravel-qr-code/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/dominik-eller/laravel-qr-code/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/dominik-eller/laravel-qr-code.svg?style=flat-square)](https://packagist.org/packages/dominik-eller/laravel-qr-code)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-qr-code.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-qr-code)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package allows you to generate QR Codes.
 
 ## Installation
 
@@ -23,37 +15,23 @@ You can install the package via composer:
 composer require dominik-eller/laravel-qr-code
 ```
 
-You can publish and run the migrations with:
+### Usage Example: Generating a URL QR Code
 
-```bash
-php artisan vendor:publish --tag="laravel-qr-code-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-qr-code-config"
-```
-
-This is the contents of the published config file:
+You can easily generate a QR code for a URL by using the `QrCode` facade. Here’s how you can generate a QR code for a URL like `https://example.com`:
 
 ```php
-return [
-];
-```
+use Deller\QrCode\Facades\QrCodeFacade;
 
-Optionally, you can publish the views using
+// Generate a QR code for a URL
+$qrCode = QrCodeFacade::create('url')
+    ->setUrl('https://example.com')
+    ->setSize(300)  // Set the size of the QR code
+    ->setColor([0, 0, 0])  // Set the foreground color (black)
+    ->setBackgroundColor([255, 255, 255])  // Set the background color (white)
+    ->setErrorCorrectionLevel('H')  // Set error correction level (High)
+    ->generate();
 
-```bash
-php artisan vendor:publish --tag="laravel-qr-code-views"
-```
-
-## Usage
-
-```php
-$qrCode = new Deller\QrCode();
-echo $qrCode->echoPhrase('Hello, Deller!');
+// Now you can return the QR code as a string, or save it to a file, etc.
 ```
 
 ## Testing

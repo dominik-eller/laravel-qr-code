@@ -16,9 +16,7 @@ class QrCodeServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-qr-code')
-            ->hasConfigFile()
-            ->hasViews();
+            ->name('laravel-qr-code');
     }
 
     public function packageRegistered()
