@@ -11,6 +11,7 @@ class TextQrCode extends QrCode
     public function setText(string $text)
     {
         $this->text = $text;
+
         return $this;
     }
 

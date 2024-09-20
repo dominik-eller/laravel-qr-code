@@ -1,8 +1,8 @@
 <?php
 
 use Deller\QrCode\Factories\QrCodeFactory;
-use Deller\QrCode\Types\UrlQrCode;
 use Deller\QrCode\Types\TextQrCode;
+use Deller\QrCode\Types\UrlQrCode;
 use Deller\QrCode\Types\WifiQrCode;
 
 it('creates a URL QrCode instance', function () {
