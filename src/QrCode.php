@@ -16,93 +16,138 @@ use BaconQrCode\Writer;
 abstract class QrCode
 {
     /**
+     * Error correction level of the QR code.
+     * It defines the tolerance of the QR code to damage or dirt.
      *
+     * @var ErrorCorrectionLevel
      */
     protected ErrorCorrectionLevel $errorCorrectionLevel;
 
     /**
+     * Size of the QR code in pixels.
      *
+     * @var int
      */
     protected int $size = 300;
 
     /**
-     * Foreground color of the qr code
-     * Array representing the RGB color values.
-     * Each element in the array corresponds to the intensity of
-     * Red, Green, and Blue channels respectively.
+     * Foreground color of the QR code.
+     * Represented as an array with RGB values.
      *
      * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $color = [0, 0, 0]; // Default to black
 
     /**
-     * Background color of the qr code
-     * Array representing the RGB color values.
-     * Each element in the array corresponds to the intensity of
-     * Red, Green, and Blue channels respectively.
+     * Background color of the QR code.
+     * Represented as an array with RGB values.
      *
-     * @var int[] $backgroundColor An array containing RGB values (red, green, blue).
+     * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $backgroundColor = [255, 255, 255]; // Default to white
 
     /**
+     * Margin around the QR code.
      *
+     * @var int
      */
     protected int $margin = 10;
 
     /**
+     * Color for the top-left eye of the QR code.
+     * Represented as an array with RGB values.
      *
+     * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $topLeftEyeColor = [0, 0, 0];
 
     /**
+     * Color for the top-right eye of the QR code.
+     * Represented as an array with RGB values.
      *
+     * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $topRightEyeColor = [0, 0, 0];
 
     /**
+     * Color for the bottom-left eye of the QR code.
+     * Represented as an array with RGB values.
      *
+     * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $bottomLeftEyeColor = [0, 0, 0];
 
     /**
+     * Output format of the QR code (e.g., PNG, SVG, EPS).
      *
+     * @var string
      */
     protected string $format = 'png'; // Default format is PNG
 
+    /**
+     * QrCode constructor.
+     * Initializes the error correction level to medium (M).
+     */
     public function __construct()
     {
         $this->errorCorrectionLevel = ErrorCorrectionLevel::M(); // Default to medium
     }
 
+    /**
+     * Set the size of the QR code.
+     *
+     * @param int $size Size of the QR code in pixels.
+     * @return $this
+     */
     public function setSize(int $size)
     {
         $this->size = $size;
-
         return $this;
     }
 
+    /**
+     * Set the foreground color of the QR code.
+     *
+     * @param int[] $color Array containing RGB values for the foreground color.
+     * @return $this
+     */
     public function setColor(array $color)
     {
         $this->color = $color;
-
         return $this;
     }
 
+    /**
+     * Set the background color of the QR code.
+     *
+     * @param int[] $backgroundColor Array containing RGB values for the background color.
+     * @return $this
+     */
     public function setBackgroundColor(array $backgroundColor)
     {
         $this->backgroundColor = $backgroundColor;
-
         return $this;
     }
 
+    /**
+     * Set the margin around the QR code.
+     *
+     * @param int $margin Margin size in pixels.
+     * @return $this
+     */
     public function setMargin(int $margin)
     {
         $this->margin = $margin;
-
         return $this;
     }
 
+    /**
+     * Set the error correction level of the QR code.
+     *
+     * @param string $level Error correction level: L (low), M (medium), Q (quartile), H (high).
+     * @return $this
+     * @throws \InvalidArgumentException If the provided error correction level is invalid.
+     */
     public function setErrorCorrectionLevel(string $level)
     {
         switch (strtoupper($level)) {
@@ -121,32 +166,52 @@ abstract class QrCode
             default:
                 throw new \InvalidArgumentException("Invalid error correction level: $level");
         }
-
         return $this;
     }
 
+    /**
+     * Set the color for the top-left eye of the QR code.
+     *
+     * @param int[] $color Array containing RGB values for the top-left eye color.
+     * @return $this
+     */
     public function setTopLeftEyeColor(array $color)
     {
         $this->topLeftEyeColor = $color;
-
         return $this;
     }
 
+    /**
+     * Set the color for the top-right eye of the QR code.
+     *
+     * @param int[] $color Array containing RGB values for the top-right eye color.
+     * @return $this
+     */
     public function setTopRightEyeColor(array $color)
     {
         $this->topRightEyeColor = $color;
-
         return $this;
     }
 
+    /**
+     * Set the color for the bottom-left eye of the QR code.
+     *
+     * @param int[] $color Array containing RGB values for the bottom-left eye color.
+     * @return $this
+     */
     public function setBottomLeftEyeColor(array $color)
     {
         $this->bottomLeftEyeColor = $color;
-
         return $this;
     }
 
-    // Method to set the output format (PNG, SVG, EPS)
+    /**
+     * Set the output format of the QR code (PNG, SVG, EPS).
+     *
+     * @param string $format Format of the output (png, svg, eps).
+     * @return $this
+     * @throws \InvalidArgumentException If the format is not supported.
+     */
     public function setFormat(string $format)
     {
         if (!in_array($format, ['png', 'svg', 'eps'])) {
@@ -156,56 +221,111 @@ abstract class QrCode
         return $this;
     }
 
+    /**
+     * Get the size of the QR code.
+     *
+     * @return int
+     */
     public function getSize(): int
     {
         return $this->size;
     }
 
+    /**
+     * Get the foreground color of the QR code.
+     *
+     * @return int[] Array containing RGB values for the foreground color.
+     */
     public function getColor(): array
     {
         return $this->color;
     }
 
-    public function getMargin(): int
-    {
-        return $this->margin;
-    }
-
+    /**
+     * Get the background color of the QR code.
+     *
+     * @return int[] Array containing RGB values for the background color.
+     */
     public function getBackgroundColor(): array
     {
         return $this->backgroundColor;
     }
 
+    /**
+     * Get the margin size of the QR code.
+     *
+     * @return int
+     */
+    public function getMargin(): int
+    {
+        return $this->margin;
+    }
+
+    /**
+     * Get the error correction level of the QR code.
+     *
+     * @return ErrorCorrectionLevel
+     */
     public function getErrorCorrectionLevel(): ErrorCorrectionLevel
     {
         return $this->errorCorrectionLevel;
     }
 
+    /**
+     * Get the color of the top-left eye of the QR code.
+     *
+     * @return int[] Array containing RGB values for the top-left eye.
+     */
     public function getTopLeftEyeColor(): array
     {
         return $this->topLeftEyeColor;
     }
 
+    /**
+     * Get the color of the top-right eye of the QR code.
+     *
+     * @return int[] Array containing RGB values for the top-right eye.
+     */
     public function getTopRightEyeColor(): array
     {
         return $this->topRightEyeColor;
     }
 
+    /**
+     * Get the color of the bottom-left eye of the QR code.
+     *
+     * @return int[] Array containing RGB values for the bottom-left eye.
+     */
     public function getBottomLeftEyeColor(): array
     {
         return $this->bottomLeftEyeColor;
     }
 
+    /**
+     * Get the output format of the QR code (PNG, SVG, EPS).
+     *
+     * @return string
+     */
     public function getFormat(): string
     {
         return $this->format;
     }
 
+    /**
+     * Abstract method to get the data for the QR code.
+     * Must be implemented by concrete subclasses to provide the content (e.g., URL, text, etc.).
+     *
+     * @return string The data to encode into the QR code.
+     */
     abstract public function getData(): string;
 
+    /**
+     * Generate the QR code as a binary string.
+     *
+     * @return string The binary content of the QR code image.
+     */
     public function generate(): string
     {
-        // Choose the renderer backend based on the format
         $backend = match ($this->format) {
             'svg' => new SvgImageBackEnd(),
             'eps' => new EpsImageBackEnd(),
@@ -213,60 +333,49 @@ abstract class QrCode
             default => new ImagickImageBackEnd(), // Default is PNG
         };
 
-        // Create the eye fills for the three QR code corners
         $topLeftEyeFill = EyeFill::uniform(new Rgb(...$this->topLeftEyeColor));
         $topRightEyeFill = EyeFill::uniform(new Rgb(...$this->topRightEyeColor));
         $bottomLeftEyeFill = EyeFill::uniform(new Rgb(...$this->bottomLeftEyeColor));
 
-        // Create the fill object for the foreground and background colors
         $fill = Fill::withForegroundColor(
-            new Rgb(...$this->backgroundColor),  // Background color
-            new Rgb(...$this->color),            // Foreground color
-            $topLeftEyeFill,                     // Top-left eye fill
-            $topRightEyeFill,                    // Top-right eye fill
-            $bottomLeftEyeFill                   // Bottom-left eye fill
+            new Rgb(...$this->backgroundColor),
+            new Rgb(...$this->color),
+            $topLeftEyeFill,
+            $topRightEyeFill,
+            $bottomLeftEyeFill
         );
 
-        // Create the RendererStyle object with proper parameters
         $style = new RendererStyle(
-            $this->size,        // Module size
-            $this->margin,      // Margin
-            null,        // No custom module style
-            null,          // No custom eye design (only using eye colors)
-            $fill               // Pass the custom fill object
+            $this->size,
+            $this->margin,
+            null,
+            null,
+            $fill
         );
 
-        // Create the ImageRenderer with the selected backend
-        $renderer = new ImageRenderer(
-            $style,
-            $backend
-        );
-
-        // Create the Writer with the renderer
+        $renderer = new ImageRenderer($style, $backend);
         $writer = new Writer($renderer);
 
-        // Generate the QR code with the data provided and return as string
         return $writer->writeString($this->getData());
     }
 
-    // Method to return the QR code as a Base64-encoded string
+    /**
+     * Return the QR code as a Base64-encoded string with the appropriate data URI.
+     *
+     * @return string The Base64-encoded QR code, including the data URI.
+     */
     public function toBase64(): string
     {
-        // Generate the QR code in binary format
         $qrCodeBinary = $this->generate();
-
-        // Encode the binary data to Base64
         $base64QrCode = base64_encode($qrCodeBinary);
 
-        // Determine the MIME type based on the format
         $mimeType = match ($this->format) {
             'svg' => 'image/svg+xml',
             'eps' => 'application/postscript',
             'png' => 'image/png',
-            default => 'image/png',  // Default is PNG
+            default => 'image/png',
         };
 
-        // Return the Base64 string with the correct data URI
         return "data:{$mimeType};base64,{$base64QrCode}";
     }
 }
