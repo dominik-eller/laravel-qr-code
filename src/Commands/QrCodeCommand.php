@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Deller\QrCode\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class QrCodeCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-qr-code';
 
     public $description = 'My command';
 
