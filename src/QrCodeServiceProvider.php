@@ -2,9 +2,9 @@
 
 namespace Deller\QrCode;
 
+use Deller\QrCode\Commands\QrCodeCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Deller\QrCode\Commands\QrCodeCommand;
 
 class QrCodeServiceProvider extends PackageServiceProvider
 {
