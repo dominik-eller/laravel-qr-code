@@ -11,6 +11,7 @@ class UrlQrCode extends QrCode
     public function setUrl(string $url)
     {
         $this->url = $url;
+
         return $this;
     }
 

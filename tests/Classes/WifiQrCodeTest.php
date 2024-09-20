@@ -3,7 +3,7 @@
 use Deller\QrCode\Types\WifiQrCode;
 
 it('sets the wifi correctly', function () {
-    $qrCode = new WifiQrCode();
+    $qrCode = new WifiQrCode;
     $qrCode->setSsid('Some SSID');
     $qrCode->setEncryption('WPA');
     $qrCode->setPassword('password');

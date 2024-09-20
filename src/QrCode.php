@@ -4,21 +4,28 @@ namespace Deller\QrCode;
 
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Renderer\Color\Rgb;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Renderer\RendererStyle\Fill;
-use BaconQrCode\Renderer\RendererStyle\EyeFill;
 use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\EyeFill;
+use BaconQrCode\Renderer\RendererStyle\Fill;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 
 abstract class QrCode
 {
     protected $errorCorrectionLevel;
+
     protected $size = 300;
+
     protected $color = [0, 0, 0]; // Default to black
+
     protected $backgroundColor = [255, 255, 255]; // Default to white
+
     protected $margin = 10;
+
     protected $topLeftEyeColor = [0, 0, 0];
+
     protected $topRightEyeColor = [0, 0, 0];
+
     protected $bottomLeftEyeColor = [0, 0, 0];
 
     public function __construct()
@@ -29,24 +36,28 @@ abstract class QrCode
     public function setSize(int $size)
     {
         $this->size = $size;
+
         return $this;
     }
 
     public function setColor(array $color)
     {
         $this->color = $color;
+
         return $this;
     }
 
     public function setBackgroundColor(array $backgroundColor)
     {
         $this->backgroundColor = $backgroundColor;
+
         return $this;
     }
 
     public function setMargin(int $margin)
     {
         $this->margin = $margin;
+
         return $this;
     }
 
@@ -68,24 +79,28 @@ abstract class QrCode
             default:
                 throw new \InvalidArgumentException("Invalid error correction level: $level");
         }
+
         return $this;
     }
 
     public function setTopLeftEyeColor(array $color)
     {
         $this->topLeftEyeColor = $color;
+
         return $this;
     }
 
     public function setTopRightEyeColor(array $color)
     {
         $this->topRightEyeColor = $color;
+
         return $this;
     }
 
     public function setBottomLeftEyeColor(array $color)
     {
         $this->bottomLeftEyeColor = $color;
+
         return $this;
     }
 
@@ -159,7 +174,7 @@ abstract class QrCode
         // Create the ImageRenderer with the Imagick backend
         $renderer = new ImageRenderer(
             $style,
-            new \BaconQrCode\Renderer\Image\ImagickImageBackEnd()
+            new \BaconQrCode\Renderer\Image\ImagickImageBackEnd
         );
 
         // Create the Writer with the renderer
@@ -168,5 +183,4 @@ abstract class QrCode
         // Generate the QR code with the data provided
         return $writer->writeString($this->getData());
     }
-
 }

@@ -21,26 +21,22 @@ class QrCodeFactory
     /**
      * Create a QR code generator based on type.
      *
-     * @param string $type
-     * @return QrCode
      * @throws InvalidArgumentException
      */
     public static function create(string $type): QrCode
     {
-        if (!array_key_exists($type, self::$types)) {
+        if (! array_key_exists($type, self::$types)) {
             throw new InvalidArgumentException("QR code type [$type] is not supported.");
         }
 
         $className = self::$types[$type];
 
-        return new $className();
+        return new $className;
     }
 
     /**
      * Register a custom QR code type.
      *
-     * @param string $type
-     * @param string $class
      * @return void
      */
     public static function registerType(string $type, string $class)

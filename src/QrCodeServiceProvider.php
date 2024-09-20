@@ -24,7 +24,7 @@ class QrCodeServiceProvider extends PackageServiceProvider
     public function packageRegistered()
     {
         $this->app->singleton('qr-code', function ($app) {
-            return new QrCodeFactory();
+            return new QrCodeFactory;
         });
     }
 }
