@@ -6,6 +6,6 @@ contact_links:
   - name: Request a feature
     url: https://github.com/dominik-eller/laravel-qr-code/discussions/new?category=ideas
     about: Share ideas for new features
-  - name: Report a security issue
-    url: https://github.com/dominik-eller/laravel-qr-code/security/policy
-    about: Learn how to notify us for sensitive bugs
+  - name: Report a security vulnarability
+    url: https://github.com/dominik-eller/laravel-qr-code#security
+    about: Please report security vulnerabilities by email to me@dominik-eller.de
