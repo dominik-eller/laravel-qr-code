@@ -327,10 +327,10 @@ abstract class QrCode
     public function generate(): string
     {
         $backend = match ($this->format) {
-            'svg' => new SvgImageBackEnd(),
-            'eps' => new EpsImageBackEnd(),
-            'png' => new ImagickImageBackEnd(),
-            default => new ImagickImageBackEnd(), // Default is PNG
+            'svg' => new SvgImageBackEnd,
+            'eps' => new EpsImageBackEnd,
+            'png' => new ImagickImageBackEnd,
+            default => new ImagickImageBackEnd, // Default is PNG
         };
 
         $topLeftEyeFill = EyeFill::uniform(new Rgb(...$this->topLeftEyeColor));
