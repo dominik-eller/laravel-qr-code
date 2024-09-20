@@ -16,6 +16,8 @@
         }
     ],
     "require": {
+        "bacon/bacon-qr-code": "^3.0",
+        "ext-gd": "*",
         "php": "^8.2",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0"

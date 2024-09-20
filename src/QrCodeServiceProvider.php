@@ -2,6 +2,7 @@
 
 namespace Deller\QrCode;
 
+use Deller\QrCode\Factories\QrCodeFactory;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Deller\QrCode\Commands\QrCodeCommand;
@@ -18,8 +19,13 @@ class QrCodeServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-qr-code')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_qr_code_table')
-            ->hasCommand(QrCodeCommand::class);
+            ->hasViews();
+    }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton('qr-code', function ($app) {
+            return new QrCodeFactory();
+        });
     }
 }

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Facade;
  */
 class QrCode extends Facade
 {
-    protected static function getFacadeAccessor(): string
+    protected static function getFacadeAccessor()
     {
-        return \Deller\QrCode\QrCode::class;
+        return 'qr-code';  // This should match the binding name in the service provider
     }
 }
