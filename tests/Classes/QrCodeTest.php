@@ -147,7 +147,7 @@ it('throws an error for not supported format', function () {
 
 it('returns a valid base64-encoded PNG string', function () {
     // Step 1: Create a QR code instance and generate the base64 string
-    $qrCode = (new UrlQrCode())
+    $qrCode = (new UrlQrCode)
         ->setUrl('https://example.com')
         ->setSize(300)
         ->setFormat('png');  // Ensure it's set to PNG
@@ -164,7 +164,7 @@ it('returns a valid base64-encoded PNG string', function () {
 
 it('returns a valid base64-encoded SVG string', function () {
     // Step 1: Create a QR code instance and generate the base64 string for SVG
-    $qrCode = (new UrlQrCode())
+    $qrCode = (new UrlQrCode)
         ->setUrl('https://example.com')
         ->setSize(300)
         ->setFormat('svg');  // Set format to SVG
@@ -181,7 +181,7 @@ it('returns a valid base64-encoded SVG string', function () {
 
 it('returns a valid base64-encoded EPS string', function () {
     // Step 1: Create a QR code instance and generate the base64 string for SVG
-    $qrCode = (new UrlQrCode())
+    $qrCode = (new UrlQrCode)
         ->setUrl('https://example.com')
         ->setSize(300)
         ->setFormat('eps');  // Set format to SVG
@@ -198,7 +198,7 @@ it('returns a valid base64-encoded EPS string', function () {
 
 it('falls back to default format when an unsupported format is used', function () {
     // Step 1: Create a QR code instance and manually set an unsupported format
-    $qrCode = new UrlQrCode();
+    $qrCode = new UrlQrCode;
     $qrCode->setUrl('https://example.com');
 
     // Manually set an unsupported format
@@ -212,4 +212,3 @@ it('falls back to default format when an unsupported format is used', function (
     // Step 3: Assert that the fallback PNG MIME type is used
     expect($base64QrCode)->toStartWith('data:image/png;base64,');
 });
-

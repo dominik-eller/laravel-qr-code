@@ -15,14 +15,8 @@ use BaconQrCode\Writer;
 
 abstract class QrCode
 {
-    /**
-     *
-     */
     protected ErrorCorrectionLevel $errorCorrectionLevel;
 
-    /**
-     *
-     */
     protected int $size = 300;
 
     /**
@@ -41,33 +35,18 @@ abstract class QrCode
      * Each element in the array corresponds to the intensity of
      * Red, Green, and Blue channels respectively.
      *
-     * @var int[] $backgroundColor An array containing RGB values (red, green, blue).
+     * @var int[] An array containing RGB values (red, green, blue).
      */
     protected array $backgroundColor = [255, 255, 255]; // Default to white
 
-    /**
-     *
-     */
     protected int $margin = 10;
 
-    /**
-     *
-     */
     protected array $topLeftEyeColor = [0, 0, 0];
 
-    /**
-     *
-     */
     protected array $topRightEyeColor = [0, 0, 0];
 
-    /**
-     *
-     */
     protected array $bottomLeftEyeColor = [0, 0, 0];
 
-    /**
-     *
-     */
     protected string $format = 'png'; // Default format is PNG
 
     public function __construct()
@@ -149,10 +128,11 @@ abstract class QrCode
     // Method to set the output format (PNG, SVG, EPS)
     public function setFormat(string $format)
     {
-        if (!in_array($format, ['png', 'svg', 'eps'])) {
+        if (! in_array($format, ['png', 'svg', 'eps'])) {
             throw new \InvalidArgumentException("Unsupported format: $format. Supported formats are: png, svg, eps.");
         }
         $this->format = strtolower($format);
+
         return $this;
     }
 
@@ -207,10 +187,10 @@ abstract class QrCode
     {
         // Choose the renderer backend based on the format
         $backend = match ($this->format) {
-            'svg' => new SvgImageBackEnd(),
-            'eps' => new EpsImageBackEnd(),
-            'png' => new ImagickImageBackEnd(),
-            default => new ImagickImageBackEnd(), // Default is PNG
+            'svg' => new SvgImageBackEnd,
+            'eps' => new EpsImageBackEnd,
+            'png' => new ImagickImageBackEnd,
+            default => new ImagickImageBackEnd, // Default is PNG
         };
 
         // Create the eye fills for the three QR code corners
