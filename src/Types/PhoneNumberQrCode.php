@@ -15,8 +15,6 @@ class PhoneNumberQrCode extends QrCode
 {
     /**
      * The phone number to be encoded into the QR code.
-     *
-     * @var string
      */
     protected string $phoneNumber;
 
@@ -25,7 +23,7 @@ class PhoneNumberQrCode extends QrCode
      *
      * This method sets the phone number that will be encoded into the QR code.
      *
-     * @param string $phoneNumber The phone number to encode in the QR code.
+     * @param  string  $phoneNumber  The phone number to encode in the QR code.
      * @return $this
      */
     public function setPhoneNumber(string $phoneNumber)
@@ -45,6 +43,6 @@ class PhoneNumberQrCode extends QrCode
      */
     public function getData(): string
     {
-        return 'tel:' . $this->phoneNumber;
+        return 'tel:'.$this->phoneNumber;
     }
 }

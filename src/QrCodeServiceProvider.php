@@ -23,8 +23,7 @@ class QrCodeServiceProvider extends PackageServiceProvider
      * This method is responsible for defining the package name and registering its components.
      * The package is identified by the name `laravel-qr-code`.
      *
-     * @param Package $package The package instance for configuration.
-     * @return void
+     * @param  Package  $package  The package instance for configuration.
      */
     public function configurePackage(Package $package): void
     {

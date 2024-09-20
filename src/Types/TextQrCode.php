@@ -15,8 +15,6 @@ class TextQrCode extends QrCode
 {
     /**
      * The plain text to be encoded into the QR code.
-     *
-     * @var string
      */
     protected string $text;
 
@@ -25,7 +23,7 @@ class TextQrCode extends QrCode
      *
      * This method sets the plain text that will be encoded into the QR code.
      *
-     * @param string $text The text to encode in the QR code.
+     * @param  string  $text  The text to encode in the QR code.
      * @return $this
      */
     public function setText(string $text)

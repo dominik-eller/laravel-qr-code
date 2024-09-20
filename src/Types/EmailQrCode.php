@@ -15,8 +15,6 @@ class EmailQrCode extends QrCode
 {
     /**
      * The email address to be encoded into the QR code.
-     *
-     * @var string
      */
     protected string $email;
 
@@ -25,7 +23,7 @@ class EmailQrCode extends QrCode
      *
      * This method sets the email address that will be encoded into the QR code.
      *
-     * @param string $email The email address to encode in the QR code.
+     * @param  string  $email  The email address to encode in the QR code.
      * @return $this
      */
     public function setEmail(string $email)
@@ -45,6 +43,6 @@ class EmailQrCode extends QrCode
      */
     public function getData(): string
     {
-        return 'mailto:' . $this->email;
+        return 'mailto:'.$this->email;
     }
 }

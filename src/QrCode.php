@@ -18,15 +18,11 @@ abstract class QrCode
     /**
      * Error correction level of the QR code.
      * It defines the tolerance of the QR code to damage or dirt.
-     *
-     * @var ErrorCorrectionLevel
      */
     protected ErrorCorrectionLevel $errorCorrectionLevel;
 
     /**
      * Size of the QR code in pixels.
-     *
-     * @var int
      */
     protected int $size = 300;
 
@@ -48,8 +44,6 @@ abstract class QrCode
 
     /**
      * Margin around the QR code.
-     *
-     * @var int
      */
     protected int $margin = 10;
 
@@ -79,8 +73,6 @@ abstract class QrCode
 
     /**
      * Output format of the QR code (e.g., PNG, SVG, EPS).
-     *
-     * @var string
      */
     protected string $format = 'png'; // Default format is PNG
 
@@ -96,56 +88,61 @@ abstract class QrCode
     /**
      * Set the size of the QR code.
      *
-     * @param int $size Size of the QR code in pixels.
+     * @param  int  $size  Size of the QR code in pixels.
      * @return $this
      */
     public function setSize(int $size)
     {
         $this->size = $size;
+
         return $this;
     }
 
     /**
      * Set the foreground color of the QR code.
      *
-     * @param int[] $color Array containing RGB values for the foreground color.
+     * @param  int[]  $color  Array containing RGB values for the foreground color.
      * @return $this
      */
     public function setColor(array $color)
     {
         $this->color = $color;
+
         return $this;
     }
 
     /**
      * Set the background color of the QR code.
      *
-     * @param int[] $backgroundColor Array containing RGB values for the background color.
+     * @param  int[]  $backgroundColor  Array containing RGB values for the background color.
      * @return $this
      */
     public function setBackgroundColor(array $backgroundColor)
     {
         $this->backgroundColor = $backgroundColor;
+
         return $this;
     }
 
     /**
      * Set the margin around the QR code.
      *
-     * @param int $margin Margin size in pixels.
+     * @param  int  $margin  Margin size in pixels.
      * @return $this
      */
     public function setMargin(int $margin)
     {
         $this->margin = $margin;
+
         return $this;
     }
 
     /**
      * Set the error correction level of the QR code.
      *
-     * @param string $level Error correction level: L (low), M (medium), Q (quartile), H (high).
+     * @param  string  $level  Error correction level: L (low), M (medium), Q (quartile), H (high).
      * @return $this
+     *
      * @throws \InvalidArgumentException If the provided error correction level is invalid.
      */
     public function setErrorCorrectionLevel(string $level)
@@ -166,65 +163,69 @@ abstract class QrCode
             default:
                 throw new \InvalidArgumentException("Invalid error correction level: $level");
         }
+
         return $this;
     }
 
     /**
      * Set the color for the top-left eye of the QR code.
      *
-     * @param int[] $color Array containing RGB values for the top-left eye color.
+     * @param  int[]  $color  Array containing RGB values for the top-left eye color.
      * @return $this
      */
     public function setTopLeftEyeColor(array $color)
     {
         $this->topLeftEyeColor = $color;
+
         return $this;
     }
 
     /**
      * Set the color for the top-right eye of the QR code.
      *
-     * @param int[] $color Array containing RGB values for the top-right eye color.
+     * @param  int[]  $color  Array containing RGB values for the top-right eye color.
      * @return $this
      */
     public function setTopRightEyeColor(array $color)
     {
         $this->topRightEyeColor = $color;
+
         return $this;
     }
 
     /**
      * Set the color for the bottom-left eye of the QR code.
      *
-     * @param int[] $color Array containing RGB values for the bottom-left eye color.
+     * @param  int[]  $color  Array containing RGB values for the bottom-left eye color.
      * @return $this
      */
     public function setBottomLeftEyeColor(array $color)
     {
         $this->bottomLeftEyeColor = $color;
+
         return $this;
     }
 
     /**
      * Set the output format of the QR code (PNG, SVG, EPS).
      *
-     * @param string $format Format of the output (png, svg, eps).
+     * @param  string  $format  Format of the output (png, svg, eps).
      * @return $this
+     *
      * @throws \InvalidArgumentException If the format is not supported.
      */
     public function setFormat(string $format)
     {
-        if (!in_array($format, ['png', 'svg', 'eps'])) {
+        if (! in_array($format, ['png', 'svg', 'eps'])) {
             throw new \InvalidArgumentException("Unsupported format: $format. Supported formats are: png, svg, eps.");
         }
         $this->format = strtolower($format);
+
         return $this;
     }
 
     /**
      * Get the size of the QR code.
-     *
-     * @return int
      */
     public function getSize(): int
     {
@@ -253,8 +254,6 @@ abstract class QrCode
 
     /**
      * Get the margin size of the QR code.
-     *
-     * @return int
      */
     public function getMargin(): int
     {
@@ -263,8 +262,6 @@ abstract class QrCode
 
     /**
      * Get the error correction level of the QR code.
-     *
-     * @return ErrorCorrectionLevel
      */
     public function getErrorCorrectionLevel(): ErrorCorrectionLevel
     {
@@ -303,8 +300,6 @@ abstract class QrCode
 
     /**
      * Get the output format of the QR code (PNG, SVG, EPS).
-     *
-     * @return string
      */
     public function getFormat(): string
     {

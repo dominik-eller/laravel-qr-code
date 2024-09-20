@@ -37,8 +37,9 @@ class QrCodeFactory
      * (e.g., `UrlQrCode`, `TextQrCode`, `EmailQrCode`, `PhoneNumberQrCode`), depending
      * on the type provided. If the type is not supported, an `InvalidArgumentException` is thrown.
      *
-     * @param string $type The type of QR code to generate (e.g., 'url', 'text', 'email', 'phone').
+     * @param  string  $type  The type of QR code to generate (e.g., 'url', 'text', 'email', 'phone').
      * @return QrCode An instance of the corresponding QR code class.
+     *
      * @throws InvalidArgumentException If the provided type is not supported.
      */
     public static function create(string $type): QrCode
@@ -58,8 +59,8 @@ class QrCodeFactory
      * This method allows users to register a custom QR code type by providing the type name
      * and the class name that implements the functionality for that type.
      *
-     * @param string $type The custom QR code type to register.
-     * @param string $class The class name that handles QR code generation for the custom type.
+     * @param  string  $type  The custom QR code type to register.
+     * @param  string  $class  The class name that handles QR code generation for the custom type.
      * @return void
      */
     public static function registerType(string $type, string $class)

@@ -15,29 +15,23 @@ class WifiQrCode extends QrCode
 {
     /**
      * The SSID (network name) of the WiFi network.
-     *
-     * @var string
      */
     protected string $ssid;
 
     /**
      * The password of the WiFi network.
-     *
-     * @var string
      */
     protected string $password;
 
     /**
      * The encryption type used by the WiFi network (e.g., WPA, WEP, or nopass).
-     *
-     * @var string
      */
     protected string $encryption;
 
     /**
      * Set the SSID (network name) for the QR code.
      *
-     * @param string $ssid The SSID of the WiFi network.
+     * @param  string  $ssid  The SSID of the WiFi network.
      * @return $this
      */
     public function setSsid(string $ssid)
@@ -50,7 +44,7 @@ class WifiQrCode extends QrCode
     /**
      * Set the password for the QR code.
      *
-     * @param string $password The password of the WiFi network.
+     * @param  string  $password  The password of the WiFi network.
      * @return $this
      */
     public function setPassword(string $password)
@@ -65,7 +59,7 @@ class WifiQrCode extends QrCode
      *
      * Common encryption types are `WPA`, `WEP`, or `nopass` for open networks.
      *
-     * @param string $encryption The encryption type of the WiFi network.
+     * @param  string  $encryption  The encryption type of the WiFi network.
      * @return $this
      */
     public function setEncryption(string $encryption)

@@ -15,8 +15,6 @@ class UrlQrCode extends QrCode
 {
     /**
      * The URL to be encoded into the QR code.
-     *
-     * @var string
      */
     protected string $url;
 
@@ -25,7 +23,7 @@ class UrlQrCode extends QrCode
      *
      * This method sets the URL that will be encoded into the QR code.
      *
-     * @param string $url The URL to encode in the QR code.
+     * @param  string  $url  The URL to encode in the QR code.
      * @return $this
      */
     public function setUrl(string $url)
