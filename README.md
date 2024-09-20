@@ -20,10 +20,10 @@ composer require dominik-eller/laravel-qr-code
 You can easily generate a QR code for a URL by using the `QrCode` facade. Here’s how you can generate a QR code for a URL like `https://example.com`:
 
 ```php
-use Deller\QrCode\Facades\QrCodeFacade;
+use Deller\QrCode\Facades\QrCode;
 
 // Generate a QR code for a URL
-$qrCode = QrCodeFacade::create('url')
+$qrCode = QrCode::create('url')
     ->setUrl('https://example.com')
     ->setSize(300)  // Set the size of the QR code
     ->setColor([0, 0, 0])  // Set the foreground color (black)
