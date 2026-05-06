@@ -15,23 +15,127 @@ You can install the package via composer:
 composer require dominik-eller/laravel-qr-code
 ```
 
-### Usage Example: Generating a URL QR Code
+## Usage
 
-You can easily generate a QR code for a URL by using the `QrCode` facade. Here’s how you can generate a QR code for a URL like `https://example.com`:
+All QR codes are created via the `QrCode` facade. Call `generate()` to get a binary string, or `toBase64()` to get a data URI ready for use in an `<img>` tag.
+
+### URL
 
 ```php
 use Deller\QrCode\Facades\QrCode;
 
-// Generate a QR code for a URL
-$qrCode = QrCode::create('url')
-    ->setUrl('https://example.com')
-    ->setSize(300)  // Set the size of the QR code
-    ->setColor([0, 0, 0])  // Set the foreground color (black)
-    ->setBackgroundColor([255, 255, 255])  // Set the background color (white)
-    ->setErrorCorrectionLevel('H')  // Set error correction level (High)
+$qrCode = QrCode::create(‘url’)
+    ->setUrl(‘https://example.com’)
+    ->setSize(300)
+    ->setColor([0, 0, 0])
+    ->setBackgroundColor([255, 255, 255])
+    ->setErrorCorrectionLevel(‘H’)
     ->generate();
+```
 
-// Now you can return the QR code as a string, or save it to a file, etc.
+### Text
+
+```php
+$qrCode = QrCode::create(‘text’)
+    ->setText(‘Hello, World!’)
+    ->setSize(300)
+    ->generate();
+```
+
+### E-Mail
+
+```php
+$qrCode = QrCode::create(‘email’)
+    ->setEmail(‘contact@example.com’)
+    ->setSize(300)
+    ->generate();
+```
+
+Opening the QR code encodes a `mailto:contact@example.com` link.
+
+### Phone number
+
+```php
+$qrCode = QrCode::create(‘phone’)
+    ->setPhoneNumber(‘+43123456789’)
+    ->setSize(300)
+    ->generate();
+```
+
+Opening the QR code encodes a `tel:+43123456789` link.
+
+### Wi-Fi
+
+`WifiQrCode` is not registered by default and must be added first:
+
+```php
+use Deller\QrCode\Facades\QrCode;
+use Deller\QrCode\Types\WifiQrCode;
+
+QrCode::registerType(‘wifi’, WifiQrCode::class);
+
+$qrCode = QrCode::create(‘wifi’)
+    ->setSsid(‘MyNetwork’)
+    ->setPassword(‘secret’)
+    ->setEncryption(‘WPA’)   // WPA, WEP, or nopass
+    ->setSize(300)
+    ->generate();
+```
+
+### Output formats
+
+The default output format is PNG. Use `setFormat()` to switch to SVG or EPS:
+
+```php
+$svg = QrCode::create(‘url’)
+    ->setUrl(‘https://example.com’)
+    ->setFormat(‘svg’)
+    ->generate();
+```
+
+### Base64 data URI
+
+Use `toBase64()` to embed the QR code directly in HTML:
+
+```php
+$dataUri = QrCode::create(‘url’)
+    ->setUrl(‘https://example.com’)
+    ->toBase64();
+
+// <img src="{{ $dataUri }}">
+```
+
+### Custom eye colors
+
+The three finder-pattern squares ("eyes") can be colored independently:
+
+```php
+$qrCode = QrCode::create(‘url’)
+    ->setUrl(‘https://example.com’)
+    ->setTopLeftEyeColor([255, 0, 0])
+    ->setTopRightEyeColor([0, 0, 255])
+    ->setBottomLeftEyeColor([0, 128, 0])
+    ->generate();
+```
+
+### Custom types
+
+Register your own QR code type by extending `QrCode` and implementing `getData()`:
+
+```php
+use Deller\QrCode\QrCode as BaseQrCode;
+
+class VCardQrCode extends BaseQrCode
+{
+    public function getData(): string
+    {
+        return "BEGIN:VCARD\nVERSION:3.0\nFN:Jane Doe\nEND:VCARD";
+    }
+}
+
+QrCode::registerType(‘vcard’, VCardQrCode::class);
+
+$qrCode = QrCode::create(‘vcard’)->generate();
 ```
 
 ## Testing
